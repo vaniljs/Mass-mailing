@@ -12,7 +12,7 @@ export default class App extends Component {
         mailToSend: [],
         messages: [],
         pause: false,
-        speed: 15
+        speed: 45
     };
 
     // sending message
@@ -42,7 +42,7 @@ export default class App extends Component {
                             sending: true,
                             sended: false
                         });
-                        setInterval(() => {
+                        setTimeout(() => {
                             this.handleSubmit();
                         }, this.state.speed * 1000) // speed sending message
                     } else {
