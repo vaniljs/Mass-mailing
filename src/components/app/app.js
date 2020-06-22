@@ -25,12 +25,15 @@ export default class App extends Component {
             data = new FormData(document.forms.sendform);
         if (arrEmails.length && !this.state.pause) {
             data.append('to', arrEmails[0]); // append first email for sending
-            console.log(arrEmails[0]);
             fetch("./send.php", { // php script for mailing
                 method: "POST",
                 body: data
             }).then((res) => {
                 if (res.ok) { // success sending
+                    let dateTime = new Date(),
+                    minit = dateTime.getMinutes() < 10 ? "0" + dateTime.getMinutes() : dateTime.getMinutes(),
+                    second = dateTime.getSeconds() < 10 ? "0" + dateTime.getSeconds() : dateTime.getSeconds();
+                    console.log(dateTime.getHours() + ":" + minit + ":" + second + "  " +  arrEmails[0]);
                     arrEmails.splice(0, 1); // delete first email
                     this.setState({
                         mailToSend: arrEmails,
